@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alexandria</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <!-- React PDF Styles (Loaded via CDN instead of JS import to prevent crash) -->
+    <link rel="stylesheet" href="https://unpkg.com/react-pdf@10.3.0/dist/Page/AnnotationLayer.css" />
+    <link rel="stylesheet" href="https://unpkg.com/react-pdf@10.3.0/dist/Page/TextLayer.css" />
+    
+    <style>
+      :root {
+        --color-neon-purple: #a855f7;
+        --color-neon-blue: #3b82f6;
+        --color-glass-border: rgba(255, 255, 255, 0.1);
+        --color-glass-bg: rgba(255, 255, 255, 0.05);
+      }
+      body {
+        font-family: 'Lato', system-ui, sans-serif; /* Modern sans-serif */
+        background-color: #0f0720;
+        color: #f8fafc;
+        /* Deep purple/blue gradient background matching the image style */
+        background-image: 
+          radial-gradient(circle at 50% 0%, #4c1d95 0%, #0f0720 60%),
+          linear-gradient(to bottom, #0f0720, #000000);
+        background-attachment: fixed;
+        min-height: 100vh;
+      }
+      
+      h1, h2, h3, h4, h5, h6, .font-heading {
+        font-family: 'Lato', sans-serif;
+        font-weight: 700;
+      }
+      
+      /* Glassmorphism Inputs */
+      input, select, textarea {
+        background-color: rgba(0, 0, 0, 0.3) !important;
+        backdrop-filter: blur(12px);
+        color: #e2e8f0 !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        border-radius: 12px !important; /* Rounded corners */
+        transition: all 0.3s ease;
+      }
+      input::placeholder, textarea::placeholder {
+        color: #64748b !important;
+      }
+      input:focus, select:focus, textarea:focus {
+        border-color: #a855f7 !important; /* Purple Glow */
+        outline: none;
+        box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+      }
+
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: rgba(0,0,0,0.3); 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(255,255,255,0.1); 
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #a855f7; 
+      }
+
+      /* Hide scrollbar for Chrome, Safari and Opera */
+      .no-scrollbar::-webkit-scrollbar {
+          display: none;
+      }
+      /* Hide scrollbar for IE, Edge and Firefox */
+      .no-scrollbar {
+          -ms-overflow-style: none;  /* IE and Edge */
+          scrollbar-width: none;  /* Firefox */
+      }
+      
+      /* PDF Viewer Overrides */
+      .react-pdf__Page__canvas {
+        margin: 0 auto;
+        border-radius: 8px;
+        box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+      }
+      .react-pdf__Page__textContent {
+        user-select: text; 
+      }
+
+      /* Highlight styling */
+      .temporary-highlight {
+        background-color: rgba(168, 85, 247, 0.4) !important; /* Neon Purple */
+        border-radius: 4px;
+        animation: fadeOutHighlight 3s forwards;
+      }
+
+      @keyframes fadeOutHighlight {
+        0% { background-color: rgba(168, 85, 247, 0.5); }
+        70% { background-color: rgba(168, 85, 247, 0.5); }
+        100% { background-color: transparent; }
+      }
+
+      /* --- Theme Styles --- */
+      
+      /* Standard Dark/Neon Mode */
+      .theme-dark .react-pdf__Page__canvas {
+        filter: invert(0.9) hue-rotate(180deg) contrast(0.9);
+      }
+      .theme-dark .react-pdf__Page {
+        background-color: #1e1b4b !important; 
+        border-color: #312e81 !important;
+      }
+      
+      /* Light Mode Override (if selected) */
+      .theme-light .react-pdf__Page__canvas {
+        filter: none;
+      }
+      
+      /* Night Mode */
+      .theme-night .react-pdf__Page__canvas {
+        filter: sepia(0.2) contrast(0.9) brightness(0.8);
+      }
+
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4",
+    "lucide-react": "https://esm.sh/lucide-react@^0.575.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react-pdf/": "https://esm.sh/react-pdf@^10.3.0/",
+    "react-pdf": "https://esm.sh/react-pdf@^10.3.0",
+    "@google/genai": "https://esm.sh/@google/genai@^1.42.0",
+    "jspdf": "https://esm.sh/jspdf@2.5.1"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <!-- Entry point script is required for the app to start -->
+    <script type="module" src="./index.tsx"></script>
+  </body>
+</html>
